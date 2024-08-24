@@ -1,7 +1,7 @@
-package com.hyeyeoung.study.ehcache.repository;
+package com.hyeyeoung.study.study.ehcache.repository;
 
-import com.hyeyeoung.study.ehcache.database.Persons;
-import com.hyeyeoung.study.ehcache.entity.Person;
+import com.hyeyeoung.study.study.ehcache.database.Persons;
+import com.hyeyeoung.study.study.ehcache.entity.Person;
 import org.springframework.stereotype.Repository;
 
 @Repository

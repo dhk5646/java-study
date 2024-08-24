@@ -1,4 +1,4 @@
-package com.hyeyeoung.study;
+package com.hyeyeoung.study.study;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

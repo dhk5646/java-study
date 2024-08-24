@@ -1,4 +1,4 @@
-package com.hyeyeoung.study.ehcache.entity;
+package com.hyeyeoung.study.study.ehcache.entity;
 
 
 import lombok.*;

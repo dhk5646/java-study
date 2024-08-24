@@ -1,7 +1,7 @@
-package com.hyeyeoung.study.ehcache.config.expiry;
+package com.hyeyeoung.study.study.ehcache.config.expiry;
 
 
-import com.hyeyeoung.study.ehcache.entity.Person;
+import com.hyeyeoung.study.study.ehcache.entity.Person;
 import org.ehcache.expiry.ExpiryPolicy;
 
 import java.time.Duration;

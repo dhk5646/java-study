@@ -1,7 +1,8 @@
-package com.hyeyeoung.study.ehcache.controller;
+package com.hyeyeoung.study.study.ehcache.controller;
 
-import com.hyeyeoung.study.ehcache.entity.Person;
-import com.hyeyeoung.study.ehcache.service.EhcachePersonService;
+import com.hyeyeoung.study.response.ApiResponse;
+import com.hyeyeoung.study.study.ehcache.entity.Person;
+import com.hyeyeoung.study.study.ehcache.service.EhcachePersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ public class EhcacheController {
     }
 
     @GetMapping(value = "/cache-person/{name}")
-    public String getEhcacheCommonCode(@PathVariable String name) {
-        return ehcachePersonService.selectPersonFromCache(name).toString();
+    public ApiResponse<Person> getEhcacheCommonCode(@PathVariable String name) {
+        return ApiResponse.success(ehcachePersonService.selectPersonFromCache(name));
     }
 }

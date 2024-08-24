@@ -1,8 +1,8 @@
-package com.hyeyeoung.study.ehcache.config;
+package com.hyeyeoung.study.study.ehcache.config;
 
-import com.hyeyeoung.study.ehcache.config.expiry.DefaultExpiry;
-import com.hyeyeoung.study.ehcache.constants.EhcacheConfigurationConstants;
-import com.hyeyeoung.study.ehcache.entity.Person;
+import com.hyeyeoung.study.study.ehcache.config.expiry.DefaultExpiry;
+import com.hyeyeoung.study.study.ehcache.constants.EhcacheConfigurationConstants;
+import com.hyeyeoung.study.study.ehcache.entity.Person;
 import org.ehcache.config.CacheConfiguration;
 import org.ehcache.config.builders.CacheConfigurationBuilder;
 import org.ehcache.config.builders.CacheEventListenerConfigurationBuilder;

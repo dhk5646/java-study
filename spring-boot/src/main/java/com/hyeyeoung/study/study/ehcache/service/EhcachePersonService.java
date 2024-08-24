@@ -1,8 +1,8 @@
-package com.hyeyeoung.study.ehcache.service;
+package com.hyeyeoung.study.study.ehcache.service;
 
-import com.hyeyeoung.study.ehcache.constants.EhcacheConfigurationConstants;
-import com.hyeyeoung.study.ehcache.entity.Person;
-import com.hyeyeoung.study.ehcache.repository.EhcachePersonRepository;
+import com.hyeyeoung.study.study.ehcache.constants.EhcacheConfigurationConstants;
+import com.hyeyeoung.study.study.ehcache.entity.Person;
+import com.hyeyeoung.study.study.ehcache.repository.EhcachePersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;

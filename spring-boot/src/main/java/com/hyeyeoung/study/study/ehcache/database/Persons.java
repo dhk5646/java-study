@@ -1,6 +1,6 @@
-package com.hyeyeoung.study.ehcache.database;
+package com.hyeyeoung.study.study.ehcache.database;
 
-import com.hyeyeoung.study.ehcache.entity.Person;
+import com.hyeyeoung.study.study.ehcache.entity.Person;
 
 import java.util.ArrayList;
 import java.util.List;
