@@ -39,6 +39,9 @@ dependencies {
     // cache dependency
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.ehcache:ehcache:3.10.0'
+
+    // api-response
+    implementation(project(':api-response'))
 }
 
 tasks.named('test') {
