@@ -2,6 +2,7 @@ package com.hyeyeoung.study.response;
 
 import com.hyeyeoung.study.response.enums.ApiResponseEnumInterface;
 import com.hyeyeoung.study.response.enums.ApiResponseEnum;
+import com.hyeyeoung.study.response.exception.ApiResponseRuntimeException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -32,7 +33,8 @@ public class ApiResponse<T> {
         return new ApiResponse<>(apiResponseEnumInterface, data);
     }
 
-    public static ApiResponse<Void> fail(ApiResponseEnumInterface apiResponseEnumInterface) {
+    public static <T> ApiResponse<T> fail(ApiResponseEnumInterface apiResponseEnumInterface) {
         return ApiResponse.fail(apiResponseEnumInterface, null);
     }
+
 }
