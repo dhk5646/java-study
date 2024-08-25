@@ -2,10 +2,15 @@ package com.hyeyeoung.study.domain.sample.database;
 
 import com.hyeyeoung.study.domain.sample.entity.Sample;
 import com.hyeyeoung.study.response.enums.ApiResponseEnum;
-import com.hyeyeoung.study.exception.ApplicationRuntimeException;
+import com.hyeyeoung.study.response.exception.ApiResponseRuntimeException;
+import com.hyeyeoung.study.response.exception.ServerErrorRuntimeException;
+import io.micrometer.common.util.StringUtils;
+import org.apache.catalina.Server;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static io.micrometer.common.util.StringUtils.*;
 
 
 public class Samples {
@@ -19,8 +24,8 @@ public class Samples {
     }
 
     public static Sample select(String id) {
-        if (id == null) {
-            throw new ApplicationRuntimeException(ApiResponseEnum.NOT_EXIST);
+        if (isBlank(id)) {
+            throw new ServerErrorRuntimeException(ApiResponseEnum.NOT_EXIST);
         }
 
         return samples.stream()
