@@ -1,5 +1,5 @@
 rootProject.name = 'java-study'
 
-include 'spring-boot'
+include 'app-api'
 include 'api-response'
 
