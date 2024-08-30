@@ -19,32 +19,19 @@ public abstract class AESCipher {
 
     private final SecretKey secretKey;
 
-    protected AESCipher(AESKeySize keySize, String keyString) {
-        this.secretKey = generateKey(keySize, keyString);
+    protected AESCipher(AESKeySize keySize, byte[] keyBytes) {
+        validateKeyString(keySize, keyBytes);
+        this.secretKey = generateKey(keySize, keyBytes);
     }
 
-    private SecretKey generateKey(AESKeySize keySize, String keyString) {
-        validateKeyString(keySize, keyString);
-
-        byte[] keyBytes = keyString.getBytes(StandardCharsets.UTF_8);
-        byte[] newKeyBytes = new byte[keySize.getByteSize()];
-
-        // keyBytes 가  [1,2,3,4,5] 이고 keySize의 byteSize 가 16 이라면, newKeyBytes = [1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,6]
-        for (int i = 0; i < newKeyBytes.length; i++) {
-            newKeyBytes[i] = keyBytes[i % keyBytes.length];
-        }
-
+    private SecretKey generateKey(AESKeySize keySize, byte[] keyBytes) {
+        byte[] newKeyBytes = Arrays.copyOf(keyBytes, keySize.getByteSize());
         return new SecretKeySpec(newKeyBytes, ALGORITHM);
     }
 
-    private void validateKeyString(AESKeySize aesKeySize, String keyString) {
-        if (keyString == null || keyString.isBlank()) {
-            throw new IllegalArgumentException("Key string must not be empty.");
-        }
-
-        int minLength = aesKeySize.getByteSize();
-        if (keyString.length() < minLength) {
-            throw new IllegalArgumentException("The key size must be at least " + minLength + " digits.");
+    private void validateKeyString(AESKeySize aesKeySize, byte[] keyBytes) {
+        if (keyBytes.length < aesKeySize.getByteSize()) {
+            throw new IllegalArgumentException("The key size must be at least " + aesKeySize.getByteSize() + " bytes.");
         }
     }
 

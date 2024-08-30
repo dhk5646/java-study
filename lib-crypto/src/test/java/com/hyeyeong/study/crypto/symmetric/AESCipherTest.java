@@ -18,7 +18,7 @@ public class AESCipherTest {
         String actual = "test";
 
         // when
-        AESCipher aesCipher = new AES128Cipher(keyString);
+        AESCipher aesCipher = new AES128Cipher(keyString.getBytes());
         String encrypted = aesCipher.encrypt(actual);
         String expected = aesCipher.decrypt(encrypted);
 
@@ -35,10 +35,10 @@ public class AESCipherTest {
         String plantText = "test";
 
         // when
-        AESCipher aesCipher1 = new AES128Cipher(keyString);
+        AESCipher aesCipher1 = new AES128Cipher(keyString.getBytes());
         String encrypted1 = aesCipher1.encrypt(plantText);
 
-        AESCipher aesCipher2 = new AES128Cipher(keyString);
+        AESCipher aesCipher2 = new AES128Cipher(keyString.getBytes());
         String encrypted2 = aesCipher2.encrypt(plantText);
 
         // then
