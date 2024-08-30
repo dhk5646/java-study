@@ -9,11 +9,31 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+subprojects {
+
+    repositories {
+        mavenCentral()
+    }
+
+    apply plugin: 'java'
+
+    sourceCompatibility = '21'
+    targetCompatibility = '21'
+
+    dependencies {
+
+        compileOnly 'org.projectlombok:lombok:1.18.30'
+        annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+        testImplementation 'org.projectlombok:lombok:1.18.30'
+        testImplementation platform('org.junit:junit-bom:5.10.0')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }
 
-test {
-    useJUnitPlatform()
-}
+
