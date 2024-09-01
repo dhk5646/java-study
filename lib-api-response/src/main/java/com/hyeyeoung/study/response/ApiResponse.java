@@ -1,40 +1,55 @@
 package com.hyeyeoung.study.response;
 
-import com.hyeyeoung.study.response.enums.ApiResponseEnumInterface;
 import com.hyeyeoung.study.response.enums.ApiResponseEnum;
-import com.hyeyeoung.study.response.exception.ApiResponseRuntimeException;
+import com.hyeyeoung.study.response.enums.ApiResponseEnumInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
 public class ApiResponse<T> {
+    private final Boolean isSuccessful;
     private final Integer code;
     private final String message;
-    private final Boolean isSuccessful;
     private final T data;
 
-    public ApiResponse (ApiResponseEnumInterface apiResponseEnum, T data) {
+    public ApiResponse(boolean isSuccessful, ApiResponseEnumInterface apiResponseEnum, T data) {
+        this.isSuccessful = isSuccessful;
         this.code = apiResponseEnum.getCode();
         this.message = apiResponseEnum.getMessage();
-        this.isSuccessful = apiResponseEnum.isSuccessful();
         this.data = data;
     }
 
-    public static <T> ApiResponse<T> success(T data) {
-        return new ApiResponse<>(ApiResponseEnum.SUCCESS, data);
+    public static <T> ApiResponse<T> success(ApiResponseEnumInterface apiResponseEnum, T data) {
+        return new ApiResponse<>(true, apiResponseEnum, data);
     }
 
     public static <T> ApiResponse<T> success() {
-        return ApiResponse.success(null);
+        return ApiResponse.success(ApiResponseEnum.OK, null);
     }
 
-    public static <T> ApiResponse<T> fail(ApiResponseEnumInterface apiResponseEnumInterface, T data) {
-        return new ApiResponse<>(apiResponseEnumInterface, data);
+    public static <T> ApiResponse<T> success(ApiResponseEnumInterface apiResponseEnum) {
+        return ApiResponse.success(apiResponseEnum, null);
     }
 
-    public static <T> ApiResponse<T> fail(ApiResponseEnumInterface apiResponseEnumInterface) {
-        return ApiResponse.fail(apiResponseEnumInterface, null);
+    public static <T> ApiResponse<T> success(T data) {
+        return ApiResponse.success(ApiResponseEnum.OK, data);
+    }
+
+    public static <T> ApiResponse<T> fail(ApiResponseEnumInterface apiResponseEnum, T data) {
+        return new ApiResponse<>(false, apiResponseEnum, data);
+    }
+
+    public static <T> ApiResponse<T> fail() {
+        return ApiResponse.fail(ApiResponseEnum.INTERNAL_SERVER_ERROR, null);
+    }
+
+    public static <T> ApiResponse<T> fail(ApiResponseEnumInterface apiResponseEnum) {
+        return ApiResponse.fail(apiResponseEnum, null);
+    }
+
+    public static <T> ApiResponse<T> fail(T data) {
+        return ApiResponse.fail(ApiResponseEnum.INTERNAL_SERVER_ERROR, data);
     }
 
 }

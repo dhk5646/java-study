@@ -7,18 +7,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ApiResponseEnum implements ApiResponseEnumInterface {
 
-    SUCCESS(0, "Success", true),
+    /**
+     * http 코드
+     */
+    OK(200, "Success"),
+    INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
 
     /**
      * 범용 오류 코드
      */
-    NOT_EXIST(1001, "Entity is not exist", false),
-    INTERNAL_SERVER_ERROR(1500, "Internal Server Error", false),
+    NOT_EXIST(1001, "Entity is not exist"),
+
 
     ;
 
     private final Integer code;
     private final String message;
-    private final boolean isSuccessful;
 
 }
