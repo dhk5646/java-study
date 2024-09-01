@@ -5,6 +5,4 @@ public interface ApiResponseEnumInterface {
     Integer getCode();
 
     String getMessage();
-
-    boolean isSuccessful();
 }
