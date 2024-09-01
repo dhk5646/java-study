@@ -1,4 +1,4 @@
-package com.hyeyeoung.study.domain.sample.api_response.dto;
+package com.hyeyeoung.study.domain.sample.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

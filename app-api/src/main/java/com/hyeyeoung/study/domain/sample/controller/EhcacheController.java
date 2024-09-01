@@ -1,4 +1,4 @@
-package com.hyeyeoung.study.domain.sample.ehcache.controller;
+package com.hyeyeoung.study.domain.sample.controller;
 
 import com.hyeyeoung.study.domain.sample.entity.Sample;
 import com.hyeyeoung.study.domain.sample.service.SampleEhcacheService;
@@ -16,13 +16,13 @@ public class EhcacheController {
 
     private final SampleEhcacheService sampleEhcacheService;
 
-    @GetMapping(value = "/no-cache/{column1}")
-    public Sample getNoEhcacheCommonCode(@PathVariable String column1) {
-        return sampleEhcacheService.select(column1);
+    @GetMapping(value = "/no-cache/{sampleSeq}")
+    public Sample getNoEhcacheCommonCode(@PathVariable Long sampleSeq) {
+        return sampleEhcacheService.select(sampleSeq);
     }
 
-    @GetMapping(value = "/cache/{column1}")
-    public ApiResponse<Sample> getEhcacheCommonCode(@PathVariable String column1) {
-        return ApiResponse.success(sampleEhcacheService.selectFromCache(column1));
+    @GetMapping(value = "/cache/{sampleSeq}")
+    public ApiResponse<Sample> getEhcacheCommonCode(@PathVariable Long sampleSeq) {
+        return ApiResponse.success(sampleEhcacheService.selectFromCache(sampleSeq));
     }
 }

@@ -74,10 +74,10 @@ public class EhcacheConfig {
     }
 
     // Ehcache 생성
-    private CacheConfiguration<String, Sample> createSampleEhCache(CacheEventListenerConfigurationBuilder cacheEventListenerConfigurationBuilder) {
+    private CacheConfiguration<Long, Sample> createSampleEhCache(CacheEventListenerConfigurationBuilder cacheEventListenerConfigurationBuilder) {
         return CacheConfigurationBuilder
                 .newCacheConfigurationBuilder(
-                        String.class,
+                        Long.class,
                         Sample.class,
                         ResourcePoolsBuilder.heap(10L)) // 캐시의 키와 값의 유형을 지정하고, 캐시에 사용할 메모리 리소스를 정의합니다. entries 변수는 캐시에 허용되는 최대 엔트리 수를 나타내며, 이는 메모리 리소스를 할당하는 데 사용됩니다.
                 .withExpiry(new DefaultExpiry()) // 캐시 엔트리의 만료 방법을 설정
@@ -85,7 +85,6 @@ public class EhcacheConfig {
                 .withDefaultEventListenersThreadPool() // 이벤트 리스너가 실행될 기본 스레드 풀을 사용하도록 설정합니다.
                 .withService(cacheEventListenerConfigurationBuilder) // 캐시 이벤트 리스너 설정
                 .build();
-
     }
 
 //    /**
