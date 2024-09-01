@@ -1,4 +1,4 @@
-package com.hyeyeoung.study.domain.sample.api_response.controller;
+package com.hyeyeoung.study.domain.sample.controller;
 
 import com.hyeyeoung.study.domain.sample.dto.SampleDto;
 import com.hyeyeoung.study.domain.sample.service.SampleService;
@@ -21,14 +21,14 @@ public class ApiResponseSampleController {
 
     private final SampleService sampleService;
 
-    @GetMapping(value = "/success/{column1}")
-    public ApiResponse<SampleDto> selectSampleBySuccess(@PathVariable String column1) {
-        return ApiResponse.success(sampleService.select(column1));
+    @GetMapping(value = "/success/{sampleSeq}")
+    public ApiResponse<SampleDto> selectSampleBySuccess(@PathVariable Long sampleSeq) {
+        return ApiResponse.success(sampleService.select(sampleSeq));
     }
 
     @GetMapping(value = "/success/list")
     public ApiResponse<List<SampleDto>> selectSampleListBySuccess() {
-        return ApiResponse.success(sampleService.select());
+        return ApiResponse.success(sampleService.selectAll());
     }
 
     @GetMapping(value = "/fail")

@@ -1,23 +1,16 @@
 package com.hyeyeoung.study.domain.sample.repository;
 
-import com.hyeyeoung.study.domain.sample.database.Samples;
 import com.hyeyeoung.study.domain.sample.entity.Sample;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class SampleRepository {
+public interface SampleRepository extends JpaRepository<Sample, Long> {
 
-    public Sample select(String column1) {
-        return Samples.select(column1);
-    }
+    Sample findBySampleSeq(Long sampleSeq);
 
-    public List<Sample> select() {
-        return Samples.select();
-    }
+    List<Sample> findAllBy();
 
-    public void delete(String column1) {
-        Samples.delete(column1);
-    }
 }

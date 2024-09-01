@@ -14,12 +14,12 @@ public class SampleService {
 
     private final SampleRepository sampleRepository;
 
-    public SampleDto select(String id) {
-        return SampleDto.from(sampleRepository.select(id));
+    public SampleDto select(Long sampleSeq) {
+        return SampleDto.from(sampleRepository.findBySampleSeq(sampleSeq));
     }
 
-    public List<SampleDto> select() {
-        return sampleRepository.select().stream()
+    public List<SampleDto> selectAll() {
+        return sampleRepository.findAllBy().stream()
                 .map(SampleDto::from)
                 .collect(Collectors.toList());
     }

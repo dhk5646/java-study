@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SampleDto {
-    private String column1;
-    private String column2;
+    private Long sampleSeq;
+    private String content;
 
     public static SampleDto from(Sample sample) {
-        return new SampleDto(sample.getColumn1(), sample.getColumn2());
+        return new SampleDto(sample.getSampleSeq(), sample.getContent());
     }
 }

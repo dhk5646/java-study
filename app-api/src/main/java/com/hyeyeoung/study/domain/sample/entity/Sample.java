@@ -1,28 +1,62 @@
 package com.hyeyeoung.study.domain.sample.entity;
 
 
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
+import java.time.LocalDateTime;
 
+@Entity
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@Getter
-@EqualsAndHashCode
-public class Sample implements Serializable {
-    private String column1;
-    private String column2;
+@Table(name = "Samples")
+public class Sample {
 
-    public static Sample of(String column1, String column2) {
-        return new Sample(column1, column2);
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long sampleSeq;
+
+    @Column
+    private String content;
+
+    @Column
+    private Long createdBy;
+
+    @Column
+    private LocalDateTime createdDate;
+
+    @Column
+    private Long modifiedBy;
+
+    @Column
+    private LocalDateTime modifiedDate;
+
+    public static Sample of(String content) {
+        return new Sample(
+                null,
+                content,
+                1L,
+                LocalDateTime.now(),
+                1L,
+                LocalDateTime.now()
+        );
     }
 
     public static Sample empty() {
-        return new Sample();
+        return new Sample(
+                null,
+                null,
+                1L,
+                LocalDateTime.now(),
+                1L,
+                LocalDateTime.now()
+        );
     }
 
-    public void updateColumn1(String column1) {
-        this.column1 = column1;
+    public void modifyContent(String content) {
+        this.content = content;
     }
 }
