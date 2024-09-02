@@ -2,7 +2,7 @@ package com.hyeyeoung.study.domain.sample.service;
 
 import com.hyeyeoung.study.common.ehcache.constants.EhcacheConfigurationConstants;
 import com.hyeyeoung.study.domain.sample.entity.Sample;
-import com.hyeyeoung.study.domain.sample.repository.SampleRepository;
+import com.hyeyeoung.study.domain.sample.repository.SampleJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SampleEhcacheService {
 
-    private final SampleRepository sampleRepository;
+    private final SampleJpaRepository sampleRepository;
 
     public Sample select(Long sampleSeq) {
         return sampleRepository.findBySampleSeq(sampleSeq);

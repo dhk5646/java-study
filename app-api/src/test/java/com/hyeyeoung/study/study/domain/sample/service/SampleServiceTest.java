@@ -2,7 +2,7 @@ package com.hyeyeoung.study.study.domain.sample.service;
 
 import com.hyeyeoung.study.domain.sample.dto.SampleDto;
 import com.hyeyeoung.study.domain.sample.entity.Sample;
-import com.hyeyeoung.study.domain.sample.repository.SampleRepository;
+import com.hyeyeoung.study.domain.sample.repository.SampleJpaRepository;
 import com.hyeyeoung.study.domain.sample.service.SampleService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class SampleServiceTest {
     private SampleService sampleService;
 
     @Autowired
-    private SampleRepository sampleRepository;
+    private SampleJpaRepository sampleRepository;
 
     @Test
     void testSelectSample() {
