@@ -1,7 +1,7 @@
 package com.hyeyeoung.study.domain.sample.service;
 
 import com.hyeyeoung.study.domain.sample.dto.SampleDto;
-import com.hyeyeoung.study.domain.sample.repository.SampleRepository;
+import com.hyeyeoung.study.domain.sample.repository.SampleJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SampleService {
 
-    private final SampleRepository sampleRepository;
+    private final SampleJpaRepository sampleRepository;
 
     public SampleDto select(Long sampleSeq) {
         return SampleDto.from(sampleRepository.findBySampleSeq(sampleSeq));
