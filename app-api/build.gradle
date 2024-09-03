@@ -52,6 +52,9 @@ dependencies {
 
     // api-response
     implementation(project(':lib-api-response'))
+
+    // spring-actuator
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
 tasks.named('test') {
