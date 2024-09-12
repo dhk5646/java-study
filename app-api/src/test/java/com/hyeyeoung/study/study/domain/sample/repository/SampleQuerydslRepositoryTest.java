@@ -1,7 +1,7 @@
 package com.hyeyeoung.study.study.domain.sample.repository;
 
-import com.hyeyeoung.study.api.domain.sample.entity.Sample;
-import com.hyeyeoung.study.api.domain.sample.repository.SampleQuerydslRepository;
+import com.hyeyeoung.study.appapi.domain.sample.entity.Sample;
+import com.hyeyeoung.study.appapi.domain.sample.repository.SampleQuerydslRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

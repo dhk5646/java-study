@@ -1,9 +1,9 @@
 package com.hyeyeoung.study.study.domain.sample.service;
 
-import com.hyeyeoung.study.api.domain.sample.dto.SampleDto;
-import com.hyeyeoung.study.api.domain.sample.entity.Sample;
-import com.hyeyeoung.study.api.domain.sample.repository.SampleJpaRepository;
-import com.hyeyeoung.study.api.domain.sample.service.SampleService;
+import com.hyeyeoung.study.appapi.domain.sample.dto.SampleDto;
+import com.hyeyeoung.study.appapi.domain.sample.entity.Sample;
+import com.hyeyeoung.study.appapi.domain.sample.repository.SampleJpaRepository;
+import com.hyeyeoung.study.appapi.domain.sample.service.SampleService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
