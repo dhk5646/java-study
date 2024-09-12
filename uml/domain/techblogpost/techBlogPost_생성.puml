@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title: TechBlogPost 생성 과정
+autonumber
+
+
+TechBlogScrapScheduler -> TechBlogScrapJobConfig: 매일 7시 호출
+
+TechBlogScrapJobConfig -> TechBlogScrapReader: Start step
+TechBlogScrapReader -> TechBlogScrapReader: Queue<TechBlogScrapEnum> 초기화
+
+loop Queue<TechBlogScrapEnum>
+    TechBlogScrapReader -> TechBlogScrapProcessor: TechBlogScrapEnum 정보를 \nProcessor 로 전달.
+
+    TechBlogScrapProcessor -> TechBlogScraperFactory: TechBlogScrapEnum 전달
+
+    TechBlogScraperFactory -> TechBlogScrapProcessor: TechBlogScrapEnum 에 해당하는 \nTechBlogScraper 구현체 전달
+
+    TechBlogScrapProcessor -> TechBlogScrapProcessor: TechBlogScraper 를 통해 \n테크 블로그 자료 스크랩 후\nList<TechBlogPost> 로 변환
+
+    loop List<TechBlogPost>
+        TechBlogScrapProcessor -> TechBlogScrapProcessor: TechBlogPost 정보를 \nSlackWebhookClient 를 통해 메시지 전송
+    end
+
+    TechBlogScrapProcessor -> TechBlogScrapWriter: List<TechBlogPost> 전달
+
+    TechBlogScrapWriter -> TechBlogPost: List<TechBlogPost> 저장
+end
+
+note right of TechBlogScrapProcessor
+  - 에러 발생 시 적절한 예외 처리
+  - 슬랙 메시지 전송 실패 처리
+end note
+
+@enduml

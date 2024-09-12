@@ -1,6 +1,8 @@
 rootProject.name = 'java-study'
 
 include 'app-api'
+include 'app-batch'
 
 include 'common'
+include 'domain'
 

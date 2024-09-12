@@ -1,5 +1,5 @@
 server:
-  port: 18080
+  port: 18010
 
 spring:
   application:
@@ -36,7 +36,7 @@ spring:
 # spring-actuator config
 management:
   #  server:
-  #    port: 18081
+  #    port: 18011
   endpoints:
     web:
       #      base-path: "/manage"

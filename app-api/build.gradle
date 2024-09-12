@@ -51,6 +51,7 @@ dependencies {
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
     // api-response
+    implementation(project(':domain'))
     implementation(project(':common'))
 
     // spring-actuator
