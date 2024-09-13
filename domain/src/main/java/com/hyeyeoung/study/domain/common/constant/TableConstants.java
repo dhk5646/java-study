@@ -1,4 +1,4 @@
-package com.hyeyeoung.study.common.constant;
+package com.hyeyeoung.study.domain.common.constant;
 
 public final class TableConstants {
 
