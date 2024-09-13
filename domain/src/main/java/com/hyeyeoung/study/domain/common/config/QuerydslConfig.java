@@ -1,4 +1,4 @@
-package com.hyeyeoung.study.appapi.common.config;
+package com.hyeyeoung.study.domain.common.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

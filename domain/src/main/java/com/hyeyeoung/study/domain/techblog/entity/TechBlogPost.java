@@ -1,7 +1,7 @@
 package com.hyeyeoung.study.domain.techblog.entity;
 
 
-import com.hyeyeoung.study.common.constant.TableConstants;
+import com.hyeyeoung.study.domain.common.constant.TableConstants;
 import com.hyeyeoung.study.domain.techblog.enums.TechBlogEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,26 +34,33 @@ public class TechBlogPost {
     private String url;
 
     @Column
+    private LocalDateTime publishedDateTime; // 작성일시
+
+    @Column
     private Long createdBy;
 
     @Column
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDateTime;
 
     @Column
     private Long modifiedBy;
 
     @Column
-    private LocalDateTime modifiedDate;
+    private LocalDateTime modifiedDateTime;
 
-    public static TechBlogPost of(TechBlogEnum techBlogEnum, String title, String url) {
+    public static TechBlogPost of(TechBlogEnum techBlogEnum,
+                                  String title,
+                                  String url,
+                                  LocalDateTime publishedDateTime) {
         return TechBlogPost.builder()
                 .techBlogEnum(techBlogEnum)
                 .title(title)
                 .url(url)
+                .publishedDateTime(publishedDateTime)
                 .createdBy(1L)
-                .createdDate(LocalDateTime.now())
+                .createdDateTime(LocalDateTime.now())
                 .modifiedBy(1L)
-                .modifiedDate(LocalDateTime.now())
+                .modifiedDateTime(LocalDateTime.now())
                 .build();
     }
 }

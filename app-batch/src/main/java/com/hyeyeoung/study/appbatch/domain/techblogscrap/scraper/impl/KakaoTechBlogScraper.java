@@ -12,6 +12,8 @@ import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,9 @@ public class KakaoTechBlogScraper implements TechBlogScraper {
     private static final String JSON_ELEMENT_ID = "__NUXT_DATA__";
     private static final String ID = "id";
     private static final String TITLE = "title";
+    private static final String RELEASE_DATE_TIME = "releaseDateTime";
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
 
     @Override
     public List<TechBlogPost> scrap(TechBlogScrapEnum techBlogScrapEnum) {
@@ -52,7 +57,9 @@ public class KakaoTechBlogScraper implements TechBlogScraper {
 
                 String title = rootNode.get(post.get(TITLE).asInt()).asText();
 
-                TechBlogPost techBlogPost = TechBlogPost.of(techBlogScrapEnum.getTechBlogEnum(), title, postUrl);
+                LocalDateTime publishedDateTime = this.parseDateTime(rootNode.get(post.get(RELEASE_DATE_TIME).asInt()).asText());
+
+                TechBlogPost techBlogPost = TechBlogPost.of(techBlogScrapEnum.getTechBlogEnum(), title, postUrl, publishedDateTime);
 
                 techBlogPosts.add(techBlogPost);
 
@@ -65,4 +72,12 @@ public class KakaoTechBlogScraper implements TechBlogScraper {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * @param dateTimeString yyyy.MM.dd HH:mm:ss
+     */
+    private LocalDateTime parseDateTime(String dateTimeString) {
+        return LocalDateTime.parse(dateTimeString, formatter);
+    }
+
 }
