@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title: TechBlogPost 조회
+
+autonumber
+
+actor Client
+
+Client -> TechBlogPostController: TechBlogPostRequest 요청한다.
+TechBlogPostController -> TechBlogPostController: TechBlogPostRequest 를 \nTechBlogPostQuery 로 변환한다.
+TechBlogPostController -> TechBlogPostQueryService: findTechBlogPosts 요청한다.
+
+TechBlogPostQueryService -> TechBlogQuerydslRepository: findTechBlogPosts 요청한다.
+
+TechBlogQuerydslRepository -> TechBlogQuerydslRepository: List<TechBlogPost> 정보를 조회한다.
+TechBlogQuerydslRepository -> TechBlogPostQueryService: List<TechBlogPost> 반환한다.
+
+TechBlogPostQueryService -> TechBlogPostQueryService: List<TechBlogPost> 를 \nList<TechBlogPostResult> 로 변환한다.
+TechBlogPostQueryService -> TechBlogPostController: List<TechBlogPostResult> 반환한다.
+
+TechBlogPostController -> TechBlogPostController: List<TechBlogPostResult> 를 \nList<TechBlogPostResponse> 로 변환한다.
+TechBlogPostController -> Client: List<TechBlogPostResponse> 반환한다.
+
+
+@enduml
