@@ -2,6 +2,7 @@ package com.hyeyeoung.study.domain.techblog.dto.result;
 
 import com.hyeyeoung.study.domain.techblog.entity.TechBlogPost;
 import com.hyeyeoung.study.domain.techblog.enums.TechBlogEnum;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -17,13 +18,12 @@ public class TechBlogPostResult {
     private String url;
     private LocalDateTime publishedDateTime;
 
-    public static TechBlogPostResult create(TechBlogPost techBlogPost) {
-        return new TechBlogPostResult(
-                techBlogPost.getTechBlogPostSeq(),
-                techBlogPost.getTechBlogEnum(),
-                techBlogPost.getTitle(),
-                techBlogPost.getUrl(),
-                techBlogPost.getPublishedDateTime()
-        );
+    @QueryProjection
+    public TechBlogPostResult(TechBlogPost techBlogPost) {
+        this.techBlogPostSeq = techBlogPost.getTechBlogPostSeq();
+        this.techBlogEnum = techBlogPost.getTechBlogEnum();
+        this.title = techBlogPost.getTitle();
+        this.url = techBlogPost.getUrl();
+        this.publishedDateTime = techBlogPost.getPublishedDateTime();
     }
 }

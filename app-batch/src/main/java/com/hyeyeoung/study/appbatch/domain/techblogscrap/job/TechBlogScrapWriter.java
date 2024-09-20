@@ -1,7 +1,7 @@
 package com.hyeyeoung.study.appbatch.domain.techblogscrap.job;
 
 import com.hyeyeoung.study.domain.techblog.entity.TechBlogPost;
-import com.hyeyeoung.study.domain.techblog.repository.TechBlogPostJpaRepository;
+import com.hyeyeoung.study.domain.techblog.repository.TechBlogPostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.Chunk;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class TechBlogScrapWriter implements ItemWriter<List<TechBlogPost>> {
 
-    private final TechBlogPostJpaRepository techBlogPostRepository;
+    private final TechBlogPostRepository techBlogPostRepository;
 
     @Override
     public void write(Chunk<? extends List<TechBlogPost>> chunk) {
