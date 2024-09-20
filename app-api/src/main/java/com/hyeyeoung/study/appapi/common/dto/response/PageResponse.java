@@ -25,14 +25,14 @@ public class PageResponse<T> {
         private final boolean isLast;   // 마지막 페이지 여부
 
         public PageData(Page<T> page) {
-            this.pageNumber = page.getNumber();
+            this.pageNumber = page.getNumber() + 1;
             this.pageSize = page.getSize();
             this.totalElements = page.getTotalElements();
             this.totalPages = page.getTotalPages();
             this.isLast = page.isLast();
         }
     }
-    
+
     public static <T> PageResponse<T> of(Page<T> page) {
         return new PageResponse<>(page);
     }
