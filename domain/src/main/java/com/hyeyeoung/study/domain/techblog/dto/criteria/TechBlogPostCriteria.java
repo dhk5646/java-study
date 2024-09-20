@@ -8,10 +8,13 @@ import lombok.Getter;
 @AllArgsConstructor
 public class TechBlogPostCriteria {
 
-    private final TechBlogEnum techBlogEnum;
-    private final String title;
+    private final String query;
 
-    public static TechBlogPostCriteria of(TechBlogEnum techBlogEnum, String title) {
-        return new TechBlogPostCriteria(techBlogEnum, title);
+    public static TechBlogPostCriteria of(String query) {
+        return new TechBlogPostCriteria(query);
+    }
+
+    public TechBlogEnum getTechBlogEnum() {
+        return TechBlogEnum.findByName(this.query).orElse(null);
     }
 }

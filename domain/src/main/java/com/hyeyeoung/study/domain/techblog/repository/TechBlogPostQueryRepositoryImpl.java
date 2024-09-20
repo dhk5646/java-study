@@ -4,6 +4,7 @@ import com.hyeyeoung.study.domain.common.pagination.PaginationHelper;
 import com.hyeyeoung.study.domain.techblog.dto.criteria.TechBlogPostCriteria;
 import com.hyeyeoung.study.domain.techblog.dto.result.TechBlogPostResult;
 import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import static com.hyeyeoung.study.domain.common.util.QuerydslUtils.contains;
 import static com.hyeyeoung.study.domain.common.util.QuerydslUtils.eq;
 import static com.hyeyeoung.study.domain.techblog.entity.QTechBlogPost.techBlogPost;
 
@@ -31,9 +33,9 @@ public class TechBlogPostQueryRepositoryImpl implements TechBlogPostQueryReposit
     private <T> JPAQuery<T> techBlogPostQuery(TechBlogPostCriteria criteria, Expression<T> expression) {
         return jpaQueryFactory.select(expression)
                 .from(techBlogPost)
-                .where(eq(techBlogPost.techBlogEnum, criteria.getTechBlogEnum()),
-                        eq(techBlogPost.title, criteria.getTitle()))
+                .where(ExpressionUtils.or(eq(techBlogPost.techBlogEnum, criteria.getTechBlogEnum()), contains(techBlogPost.title, criteria.getQuery())))
                 .orderBy(techBlogPost.publishedDateTime.desc());
     }
+
 
 }
