@@ -6,11 +6,6 @@ spring:
     name: 'app-api'
 
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:13306/woorim
-    username: woorim_svc
-    password: woorim_svc
-
     hikari:
       connection-timeout: 3000 # 연결을 얻기 위해 기다리는 최대 시간 (밀리초)
       validation-timeout: 3000
