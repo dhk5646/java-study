@@ -1,0 +1,33 @@
+server:
+  port: 18010
+
+spring:
+  application:
+    name: 'app-api'
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:13306/woorim
+    username: woorim_svc
+    password: woorim_svc
+
+    hikari:
+      connection-timeout: 3000 # 연결을 얻기 위해 기다리는 최대 시간 (밀리초)
+      validation-timeout: 3000
+      minimum-idle: 5
+      max-lifetime: 240000 # 연결이 폐기되기 전까지의 최대 수명 (밀리초)
+      maximum-pool-size: 20 # 풀의 최대 연결 수
+      idle-timeout: 30000 #  최소 유휴 연결 수 (5로 설정하면 최소 5개의 연결을 유지).
+      pool-name: HikariCP # HikariCP 풀의 이름
+      connection-test-query: SELECT 1 # 데이터베이스 연결을 테스트하기 위한 쿼리
+
+  jpa:
+    hibernate:
+      ddl-auto: update # 프로젝트 실행 시 자동으로 DDL 을 생성할 지 결정하는 설정
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # 엔터티 변수 이름을 그대로 사용한다.
+    properties:
+      hibernate:
+        format_sql: true # 실제 JPA 의 구현체인 하이버네이트가 동작하면서 발생하는 SQL 을 포맷팅해서 출력하는 설정
+        hibernate.dialect: org.hibernate.dialect.MariaDBDialect
+    show-sql: true # JPA 처리시 발생하는 SQL 을 보여줄 것인지 결정하는 설정
