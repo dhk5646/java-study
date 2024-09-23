@@ -8,14 +8,18 @@ import com.hyeyeoung.study.common.slack.webhook.dto.SlackWebhookRequest;
 import com.hyeyeoung.study.domain.slack.entity.repository.SlackWebhookRepository;
 import com.hyeyeoung.study.domain.slack.enums.SlackWebhookEnum;
 import com.hyeyeoung.study.domain.techblog.entity.TechBlogPost;
+import com.hyeyeoung.study.domain.techblog.enums.TechBlogEnum;
 import com.hyeyeoung.study.domain.techblog.repository.TechBlogPostRepository;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -26,6 +30,7 @@ public class TechBlogScrapProcessor implements ItemProcessor<TechBlogScrapEnum, 
     private final TechBlogScraperFactory techBlogScraperFactory;
 
     private final TechBlogPostRepository techBlogPostRepository;
+
     private final SlackWebhookRepository slackWebhookRepository;
 
     @Override
@@ -33,26 +38,43 @@ public class TechBlogScrapProcessor implements ItemProcessor<TechBlogScrapEnum, 
 
         log.info("start scrap process");
 
+        List<TechBlogPost> techBlogPosts = scrap(techBlogScrapEnum);
+
+        sendSlackWebhook(techBlogPosts);
+
+        return techBlogPosts;
+
+    }
+
+    private List<TechBlogPost> scrap(TechBlogScrapEnum techBlogScrapEnum) {
         TechBlogScraper techBlogScraper = techBlogScraperFactory.getTechBlogScraper(techBlogScrapEnum);
 
         List<TechBlogPost> techBlogPosts = techBlogScraper.scrap(techBlogScrapEnum);
 
-        return techBlogPosts.stream()
-                .filter(this::sendSlackWebhook)
-                .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(techBlogPosts)) return Collections.emptyList();
 
+        Set<String> urlSet = getUrlSet(techBlogScrapEnum.getTechBlogEnum());
+
+        return techBlogPosts.stream()
+                .filter(techBlogPost -> !urlSet.contains(techBlogPost.getUrl()))
+                .collect(Collectors.toList());
     }
 
-    private boolean sendSlackWebhook(TechBlogPost techBlogPost) {
-        if (techBlogPostRepository.existsByUrl(techBlogPost.getUrl())) return false; // 중복 데이터는 전송 제외
+    // url 기준으로 동일 데이터에 대해서 필터처리
+    private Set<String> getUrlSet(TechBlogEnum techBlogEnum) {
+        return techBlogPostRepository.findByTechBlogEnum(techBlogEnum).stream()
+                .map(TechBlogPost::getUrl)
+                .collect(Collectors.toSet());
+    }
 
-        try {
-            SlackWebhookClient.postMessage(this.getUrl(), this.createWebhookRequest(techBlogPost));
-            return true; // 메시지 전송 성공
-        } catch (RuntimeException e) {
-            // 예외 발생 시 로깅
-            log.error("Failed to send message for post: {}", techBlogPost.getTitle(), e);
-            return false; // 메시지 전송 실패
+    private void sendSlackWebhook(List<TechBlogPost> techBlogPosts) {
+        for (TechBlogPost techBlogPost : techBlogPosts) {
+            try {
+                SlackWebhookClient.postMessage(this.getUrl(), this.createWebhookRequest(techBlogPost));
+            } catch (RuntimeException e) {
+                // 예외 발생 시 로깅
+                log.error("Failed to send message for post: {}", techBlogPost.getTitle(), e);
+            }
         }
     }
 

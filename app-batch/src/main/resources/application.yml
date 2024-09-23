@@ -17,4 +17,4 @@ spring:
 
   scheduler:
     cron:
-      tech-blog-scrap: "0 4 19 * * *" # 오전 7시
+      tech-blog-scrap: "0 0 7 * * *" # 오전 7시
