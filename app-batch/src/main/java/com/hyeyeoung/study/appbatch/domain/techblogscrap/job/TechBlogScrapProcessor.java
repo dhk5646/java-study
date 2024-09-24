@@ -68,9 +68,10 @@ public class TechBlogScrapProcessor implements ItemProcessor<TechBlogScrapEnum, 
     }
 
     private void sendSlackWebhook(List<TechBlogPost> techBlogPosts) {
+        String slackWebhookUrl = this.getUrl();
         for (TechBlogPost techBlogPost : techBlogPosts) {
             try {
-                SlackWebhookClient.postMessage(this.getUrl(), this.createWebhookRequest(techBlogPost));
+                SlackWebhookClient.postMessage(slackWebhookUrl, this.createWebhookRequest(techBlogPost));
             } catch (RuntimeException e) {
                 // 예외 발생 시 로깅
                 log.error("Failed to send message for post: {}", techBlogPost.getTitle(), e);
