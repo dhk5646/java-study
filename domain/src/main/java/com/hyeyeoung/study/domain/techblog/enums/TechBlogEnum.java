@@ -13,6 +13,7 @@ import static org.springframework.util.StringUtils.hasText;
 public enum TechBlogEnum {
 
     KAKAO("카카오"),
+    NAVER("네이버"),
     ;
 
     private final String name;
