@@ -12,7 +12,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public enum TechBlogScrapEnum {
 
-    KAKAO(TechBlogEnum.KAKAO, "https://tech.kakao.com/blog", "https://tech.kakao.com/posts/%s", KakaoTechBlogScraper.class),
+    KAKAO(TechBlogEnum.KAKAO, "https://tech.kakao.com/api/v1/posts/no-offset?categoryCode=blog&lastSeq=0&firstSeq=0", "https://tech.kakao.com/posts/%s", KakaoTechBlogScraper.class),
     ;
 
     private final TechBlogEnum techBlogEnum;
