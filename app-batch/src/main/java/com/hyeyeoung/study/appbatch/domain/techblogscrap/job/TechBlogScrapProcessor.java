@@ -49,7 +49,7 @@ public class TechBlogScrapProcessor implements ItemProcessor<TechBlogScrapEnum, 
     private List<TechBlogPost> scrap(TechBlogScrapEnum techBlogScrapEnum) {
         TechBlogScraper techBlogScraper = techBlogScraperFactory.getTechBlogScraper(techBlogScrapEnum);
 
-        List<TechBlogPost> techBlogPosts = techBlogScraper.scrap(techBlogScrapEnum);
+        List<TechBlogPost> techBlogPosts = techBlogScraper.scrap();
 
         if (CollectionUtils.isEmpty(techBlogPosts)) return Collections.emptyList();
 

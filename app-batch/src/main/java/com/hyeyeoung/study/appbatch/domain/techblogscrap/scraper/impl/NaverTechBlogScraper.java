@@ -3,7 +3,7 @@ package com.hyeyeoung.study.appbatch.domain.techblogscrap.scraper.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hyeyeoung.study.appbatch.domain.techblogscrap.enums.TechBlogScrapEnum;
-import com.hyeyeoung.study.appbatch.domain.techblogscrap.json.KakaoJsonData;
+import com.hyeyeoung.study.appbatch.domain.techblogscrap.json.NaverJsonData;
 import com.hyeyeoung.study.appbatch.domain.techblogscrap.scraper.TechBlogScraper;
 import com.hyeyeoung.study.domain.techblog.entity.TechBlogPost;
 import lombok.extern.slf4j.Slf4j;
@@ -14,10 +14,10 @@ import java.util.List;
 
 @Component
 @Slf4j
-public class KakaoTechBlogScraper extends TechBlogScraper {
+public class NaverTechBlogScraper extends TechBlogScraper {
 
-    public KakaoTechBlogScraper(ObjectMapper objectMapper) {
-        super(TechBlogScrapEnum.KAKAO, objectMapper);
+    public NaverTechBlogScraper(ObjectMapper objectMapper) {
+        super(TechBlogScrapEnum.NAVER, objectMapper);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class KakaoTechBlogScraper extends TechBlogScraper {
 
     @Override
     protected List<TechBlogPost> parseTechBlogPosts(String jsonData) throws JsonProcessingException {
-        KakaoJsonData kakaoJsonData = super.objectMapper.readValue(jsonData, KakaoJsonData.class);
-        return kakaoJsonData.toTechBlogPosts();
+        NaverJsonData naverJsonData = super.objectMapper.readValue(jsonData, NaverJsonData.class);
+        return naverJsonData.toTechBlogPosts();
     }
 }
