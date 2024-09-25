@@ -5,15 +5,15 @@ spring:
   application:
     name: 'app-batch'
 
+  config:
+    import:
+      - "classpath:application-domain.yml"
+
   batch:
     jdbc:
       initialize-schema: always
       # table-prefix: BATCH_
       # isolation-level-for-create: serializable
-
-  profiles:
-    include:
-      - domain
 
   scheduler:
     cron:
