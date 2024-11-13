@@ -18,7 +18,6 @@ public enum ApiResponseEnum implements ApiResponseEnumInterface {
      */
     NOT_EXIST(1001, "Entity is not exist"),
 
-
     ;
 
     private final Integer code;
