@@ -10,12 +10,12 @@ public class ApiResponseException extends RuntimeException {
 
     public ApiResponseException(ApiResponseEnumInterface apiResponseEnum) {
         super(apiResponseEnum.getMessage());
-        this.apiResponse = ApiResponse.success(apiResponseEnum);
+        this.apiResponse = ApiResponse.fail(apiResponseEnum);
     }
 
     public <T> ApiResponseException(ApiResponseEnumInterface apiResponseEnum, T data) {
         super(apiResponseEnum.getMessage());
-        this.apiResponse = ApiResponse.success(apiResponseEnum, data);
+        this.apiResponse = ApiResponse.fail(apiResponseEnum, data);
     }
 
 }

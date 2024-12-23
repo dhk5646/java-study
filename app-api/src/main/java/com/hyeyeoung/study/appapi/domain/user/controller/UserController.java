@@ -7,7 +7,8 @@ import com.hyeyeoung.study.domain.user.dto.result.UserLoginResult;
 import com.hyeyeoung.study.domain.user.service.UserLoginService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,10 +19,10 @@ public class UserController {
 
     private final UserLoginService userLoginService;
 
-    @GetMapping("/login")
-    public ApiResponse<UserLoginResponse> loginUser(@Valid UserLoginRequest request) {
+    @PostMapping("/login")
+    public ApiResponse<UserLoginResponse> login(@Valid @RequestBody UserLoginRequest request) {
         UserLoginResult result = userLoginService.login(request.toUserLoginParam());
-        return ApiResponse.success(UserLoginResponse.from(result));
+        UserLoginResponse response = UserLoginResponse.from(result);
+        return ApiResponse.success(response);
     }
-
 }
