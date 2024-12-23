@@ -16,12 +16,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ApiResponseException.class)
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse<Object> handleApiResponseException(ApiResponseException ex) {
-        log.error("handleApiResponseRuntimeException: {}", ex.getMessage(), ex);
+        log.error("handleApiResponseException: {}", ex.getMessage(), ex);
         return ex.getApiResponse();
     }
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.OK)
     public ApiResponse<Void> handleException(Exception ex) {
         log.error("handleException: {}", ex.getMessage(), ex);
         return ApiResponse.fail(ApiResponseEnum.INTERNAL_SERVER_ERROR);

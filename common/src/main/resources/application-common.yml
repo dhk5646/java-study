@@ -1,0 +1,3 @@
+jwt:
+  secret-key: "mySecretKey123456mySecretKey123456"
+  expiration-time: 86400000 # 예: 1일(밀리초 단위)
